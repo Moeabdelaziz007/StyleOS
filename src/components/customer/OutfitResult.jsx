@@ -1,10 +1,34 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import QRCode from 'react-qr-code';
+import useCyberSound from '../../hooks/useCyberSound';
 
 const OutfitResult = ({ outfit, onTryAgain }) => {
   const [copied, setCopied] = useState(false);
+  const { playSuccess, playClick } = useCyberSound();
+
+  // Play success sound when component mounts
+  useState(() => {
+    playSuccess();
+  }, []);
+
+  const handleBuyNow = () => {
+    playClick();
+    
+    const outfitItems = [
+      `${outfit.top.name} (${outfit.top.category})`,
+      `${outfit.bottom.name} (${outfit.bottom.category})`,
+      `${outfit.shoes.name} (${outfit.shoes.category})`
+    ].join(', ');
+    
+    const message = `Hi! I want to order this outfit: ${outfitItems}. Discount Code: ${outfit.discountCode}`;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    
+    window.open(whatsappUrl, '_blank');
+  };
 
   const copyToClipboard = () => {
+    playClick();
     navigator.clipboard.writeText(outfit.discountCode);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -101,19 +125,19 @@ const OutfitResult = ({ outfit, onTryAgain }) => {
           </motion.div>
         </motion.div>
 
-        {/* Discount Code Section */}
+        {/* Discount Code & QR Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
           className="bg-gray-800 rounded-lg p-8 mb-8 neon-border"
         >
-          <div className="text-center">
+          <div className="text-center mb-8">
             <h2 className="text-2xl font-mono text-cyber-primary mb-4">
               EXCLUSIVE DISCOUNT CODE
             </h2>
             <div className="relative inline-block">
-              <div className="text-4xl font-mono font-bold text-cyber-secondary bg-gray-900 px-8 py-4 rounded-lg border-2 border-cyber-secondary animate-pulse-slow">
+              <div className="text-4xl font-mono font-bold text-cyber-secondary bg-gray-900 px-8 py-4 rounded-lg border-2 border-cyber-secondary animate-pulse">
                 {outfit.discountCode}
               </div>
               {copied && (
@@ -126,7 +150,7 @@ const OutfitResult = ({ outfit, onTryAgain }) => {
                 </motion.div>
               )}
             </div>
-            <div className="mt-6">
+            <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center items-center">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -135,6 +159,38 @@ const OutfitResult = ({ outfit, onTryAgain }) => {
               >
                 COPY CODE
               </motion.button>
+            </div>
+          </div>
+          
+          {/* QR Code Section */}
+          <div className="flex flex-col md:flex-row gap-8 items-center justify-center mt-8 pt-8 border-t border-gray-700">
+            <div className="text-center">
+              <h3 className="text-xl font-mono text-cyber-primary mb-4">SCAN TO CLAIM</h3>
+              <div className="p-4 bg-white rounded-lg inline-block border-4 border-cyan-400 shadow-lg shadow-cyan-500/30">
+                <QRCode 
+                  value={`DISCOUNT_CLAIM: ${outfit.discountCode} - VALUE: 20%`} 
+                  size={128}
+                  bgColor="#ffffff"
+                  fgColor="#09090b"
+                />
+              </div>
+              <p className="text-gray-400 text-sm mt-2 font-mono">20% OFF YOUR ORDER</p>
+            </div>
+            
+            <div className="text-center">
+              <h3 className="text-xl font-mono text-cyber-primary mb-4">ORDER NOW</h3>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleBuyNow}
+                className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-mono font-bold transition-all duration-300 shadow-lg shadow-green-500/30 border-2 border-green-500 animate-pulse"
+              >
+                <div className="flex items-center gap-2">
+                  <span>📱</span>
+                  <span>ORDER VIA WHATSAPP</span>
+                </div>
+              </motion.button>
+              <p className="text-gray-400 text-sm mt-2 font-mono">Get instant assistance</p>
             </div>
           </div>
         </motion.div>

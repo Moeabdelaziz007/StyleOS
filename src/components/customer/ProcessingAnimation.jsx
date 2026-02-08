@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import useCyberSound from '../../hooks/useCyberSound';
 
 const ProcessingAnimation = () => {
   const [progress, setProgress] = useState(0);
   const [currentMessage, setCurrentMessage] = useState(0);
+  const { playProcess, stopProcess } = useCyberSound();
   
   const messages = [
     "ANALYZING FASHION TRENDS...",
@@ -13,11 +15,20 @@ const ProcessingAnimation = () => {
   ];
 
   useEffect(() => {
+    // Start processing sound
+    playProcess();
+    
     // Progress animation
     const progressInterval = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
           clearInterval(progressInterval);
+          // Stop processing sound
+          stopProcess();
+          // Haptic feedback when processing completes
+          if ('vibrate' in navigator) {
+            navigator.vibrate([200, 100, 200]); // Double pulse vibration
+          }
           return 100;
         }
         return prev + 2;
@@ -27,13 +38,18 @@ const ProcessingAnimation = () => {
     // Message rotation
     const messageInterval = setInterval(() => {
       setCurrentMessage(prev => (prev + 1) % messages.length);
+      // Light haptic feedback on message change
+      if ('vibrate' in navigator) {
+        navigator.vibrate(50); // Short vibration
+      }
     }, 1000);
 
     return () => {
       clearInterval(progressInterval);
       clearInterval(messageInterval);
+      stopProcess();
     };
-  }, []);
+  }, [playProcess, stopProcess]);
 
   return (
     <div className="min-h-screen cyberpunk-bg flex items-center justify-center p-6">

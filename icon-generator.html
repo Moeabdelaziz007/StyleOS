@@ -1,0 +1,45 @@
+// Simple icon generator using HTML Canvas
+const canvas = document.createElement('canvas');
+canvas.width = 512;
+canvas.height = 512;
+const ctx = canvas.getContext('2d');
+
+// Background
+ctx.fillStyle = '#09090b';
+ctx.fillRect(0, 0, 512, 512);
+
+// Outer circle
+ctx.beginPath();
+ctx.arc(256, 256, 160, 0, Math.PI * 2);
+ctx.fillStyle = 'rgba(6, 182, 212, 0.2)';
+ctx.fill();
+
+// Checkmark
+ctx.beginPath();
+ctx.moveTo(176, 256);
+ctx.lineTo(226, 306);
+ctx.lineTo(336, 206);
+ctx.strokeStyle = '#06b6d4';
+ctx.lineWidth = 20;
+ctx.lineCap = 'round';
+ctx.lineJoin = 'round';
+ctx.stroke();
+
+// Inner dashed circle
+ctx.beginPath();
+ctx.arc(256, 256, 120, 0, Math.PI * 2);
+ctx.strokeStyle = '#22c55e';
+ctx.lineWidth = 12;
+ctx.setLineDash([20, 20]);
+ctx.stroke();
+
+// Convert to data URL and log it
+const dataURL = canvas.toDataURL('image/png');
+console.log(dataURL);
+
+// For Node.js environment, you would save this to file
+// But since we're in browser, let's create a download link
+const link = document.createElement('a');
+link.download = 'pwa-512x512.png';
+link.href = dataURL;
+link.click();

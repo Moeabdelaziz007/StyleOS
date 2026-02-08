@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
+import PWAPrompt from './components/PWAPrompt';
 
 // Lazy load components for better performance
 const Home = lazy(() => import('./pages/Home')); 
@@ -28,6 +29,9 @@ function App() {
             <Route path="/admin" element={<Admin />} />
           </Routes>
         </Suspense>
+        
+        {/* PWA Installation Prompt */}
+        <PWAPrompt />
       </div>
     </BrowserRouter>
   );

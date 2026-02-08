@@ -1,8 +1,17 @@
+import useCyberSound from '../../hooks/useCyberSound';
+
 const BudgetSlider = ({ value, onChange }) => {
+  const { playClick } = useCyberSound();
   const minValue = 50;
   const maxValue = 500;
   
   const handleChange = (e) => {
+    // Audio feedback on slider movement
+    playClick();
+    // Haptic feedback on slider movement
+    if ('vibrate' in navigator) {
+      navigator.vibrate(25); // Very subtle vibration
+    }
     onChange(Number(e.target.value));
   };
 
@@ -30,6 +39,14 @@ const BudgetSlider = ({ value, onChange }) => {
             max={maxValue}
             value={value}
             onChange={handleChange}
+            onTouchStart={() => {
+              // Audio feedback on initial touch
+              playClick();
+              // Haptic feedback on initial touch
+              if ('vibrate' in navigator) {
+                navigator.vibrate(50);
+              }
+            }}
             className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider"
             style={getBackgroundSize()}
           />

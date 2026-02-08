@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import useCyberSound from '../../hooks/useCyberSound';
 
 const occasions = [
   { id: 'work', label: 'WORK', icon: '💼' },
@@ -8,6 +9,7 @@ const occasions = [
 ];
 
 const OccasionSelector = ({ selectedOccasion, onSelect }) => {
+  const { playClick } = useCyberSound();
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -30,7 +32,15 @@ const OccasionSelector = ({ selectedOccasion, onSelect }) => {
             key={occasion.id}
             whileHover={{ scale: 1.05, y: -5 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => onSelect(occasion.id)}
+            onClick={() => {
+              // Audio feedback
+              playClick();
+              // Haptic feedback on button press
+              if ('vibrate' in navigator) {
+                navigator.vibrate(75);
+              }
+              onSelect(occasion.id);
+            }}
             className={`p-6 rounded-lg border-2 transition-all duration-300 font-mono text-center ${
               selectedOccasion === occasion.id
                 ? 'border-cyber-primary bg-cyber-primary bg-opacity-20 text-cyber-primary neon-border'
