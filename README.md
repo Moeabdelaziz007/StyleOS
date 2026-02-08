@@ -161,6 +161,19 @@ To access the admin dashboard, long-press the logo on the customer interface for
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## 👨‍💻 مهندس النظام | System Architect
+
+**Mohamed Abdelaziz** - مهندس أنظمة الذكاء الاصطناعي | AI Systems Engineer
+
+> "لا أكتب فقط التعليمات البرمجية؛ بل أفكك الواقع إلى خوارزميات. يركز عملي على بناء أنظمة الذكاء الاصطناعي عالية التردد ووكلاء مستقلين يحلون المشاكل المعقدة بدقة رياضية."
+
+> "I don't just write code; I deconstruct reality into algorithms. My work focuses on building high-frequency AI systems and autonomous agents that solve complex problems with mathematical precision."
+
+- 🛡️ **Current Focus**: Building AI Trust Infrastructure & Security Systems
+- 🤖 **Specialty**: Autonomous Agents & Decentralized Logic Gates
+- 📧 **Contact**: Connect through GitHub for collaborations
+- 🌐 **Profile**: [Moeabdelaziz007](https://github.com/Moeabdelaziz007)
+
 ---
 
 <div align="center">
