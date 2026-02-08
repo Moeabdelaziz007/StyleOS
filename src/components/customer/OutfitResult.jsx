@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import QRCode from 'react-qr-code';
 import useCyberSound from '../../hooks/useCyberSound';
 
@@ -8,7 +8,7 @@ const OutfitResult = ({ outfit, onTryAgain }) => {
   const { playSuccess, playClick } = useCyberSound();
 
   // Play success sound when component mounts
-  useState(() => {
+  useEffect(() => {
     playSuccess();
   }, []);
 

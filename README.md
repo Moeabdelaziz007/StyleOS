@@ -14,6 +14,8 @@ A cutting-edge dual-interface fashion platform featuring an AI-powered stylist f
 - **تجربة تفاعلية** مع رسوم متحركة وانتقالات سلسة
 - **محاكاة المعالجة في الوقت الفعلي** مع ردود فعل جذابة
 - **تصميم متجاوب مع الهاتف المحمول** محسّن لجميع الأجهزة
+- **نظام صوتي متقدم** مع مؤثرات صوتية سيبربَنك مخصصة
+- **ميزة التجارة الإلكترونية** مع تكامل واتساب وزخارف QR
 
 ### لوحة التحكم الإدارية | Admin Dashboard (`/admin`)
 - **لوحة تحكم تحليلية مباشرة** مع تصور البيانات في الوقت الفعلي
@@ -22,6 +24,7 @@ A cutting-edge dual-interface fashion platform featuring an AI-powered stylist f
 - **تغذية نشاط مباشرة** تعرض تفاعلات العملاء
 - **سمة داكنة احترافية** مع عناصر واجهة مستخدم متوهجة
 - **وصول سري** عبر إيماءة الضغط الطويل على الشعار
+- **تطبيق ويب تدريجي (PWA)** يمكن تثبيته على الأجهزة المحمولة
 
 ## 🚀 التقنيات المستخدمة | Tech Stack
 
@@ -38,6 +41,20 @@ A cutting-edge dual-interface fashion platform featuring an AI-powered stylist f
 - **Charts**: Recharts for data visualization
 - **Routing**: React Router v6
 - **Icons**: Lucide React
+- **Audio**: Custom Web Audio API sound system
+- **QR Codes**: react-qr-code for discount code generation
+- **PWA**: vite-plugin-pwa for mobile app installation
+
+## 🆕 التحديثات الأخيرة | Latest Updates
+
+### ميزات جديدة مضافة | New Features Added
+- **نظام الصوت السيبربَنك**: مؤثرات صوتية مخصصة للنقرات والمعالجة والإتمام
+- **تكامل التجارة**: زر "اطلب عبر واتساب" مع رمز QR للتخصيص
+- **تطبيق ويب تدريجي**: إمكانية التثبيت على الشاشة الرئيسية للأجهزة المحمولة
+- **ردود فعل لمسية**: اهتزاز الجهاز عند التفاعلات المهمة
+- **تحسينات بصرية**: حركات نيون متحسنة وتلميع واجهة المستخدم
+
+---
 
 ## 📁 هيكل المشروع | Project Structure
 
@@ -70,12 +87,15 @@ src/
 │   │   ├── PopularStylesChart.jsx
 │   │   ├── TrafficChart.jsx
 │   │   └── LiveFeed.jsx
-│   └── customer/        # Customer interface components
-│       ├── SplashLoader.jsx
-│       ├── OccasionSelector.jsx
-│       ├── BudgetSlider.jsx
-│       ├── ProcessingAnimation.jsx
-│       └── OutfitResult.jsx
+│   ├── customer/        # Customer interface components
+│   │   ├── SplashLoader.jsx
+│   │   ├── OccasionSelector.jsx
+│   │   ├── BudgetSlider.jsx
+│   │   ├── ProcessingAnimation.jsx
+│   │   └── OutfitResult.jsx
+│   └── PWAPrompt.jsx    # PWA installation prompt
+├── hooks/
+│   └── useCyberSound.js # Custom audio sound system
 ├── data/
 │   └── mockData.js      # Mock data for demo
 ├── pages/
