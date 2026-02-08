@@ -123,4 +123,4 @@ dist
 .pnp.*
 
 # Mac files
-.DS_Store
+.DS_Store.qoder/
